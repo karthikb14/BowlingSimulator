@@ -84,7 +84,7 @@ public class Player {
                     (getPreviousFrame().isSpare() && getCurrentFrame().isFirstRollOfFrame()))) {
                 getPreviousFrame().addToBonus(score);
             }
-            if (getPreviousFrame().isStrike() && currentFrame - 1 > 0) {
+            if (getPreviousFrame().isStrike() && currentFrame - 1 > 0 && getCurrentFrame().isFirstRollOfFrame()) {
                 scoreFrames[currentFrame - 1].addToBonus(score);
             }
         }
