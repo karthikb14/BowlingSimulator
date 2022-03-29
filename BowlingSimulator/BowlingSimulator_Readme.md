@@ -32,4 +32,5 @@ Expected:
 4. 10; 10; 10; 10; 10; 10; 10; 10; 10; 10; (10); (10);
 
 Score calculated: 300
+
 Expected: 300
