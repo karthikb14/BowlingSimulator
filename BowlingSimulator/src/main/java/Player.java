@@ -15,6 +15,10 @@ public class Player {
         this.playerId = playerId;
         this.playerName = playerName;
         currentFrame = 0;
+        createFrames();
+    }
+    
+    private void createFrames() {
         for (int i=0; i< scoreFrames.length; i++) {
             scoreFrames[i] = new Frame();
         }
@@ -52,6 +56,7 @@ public class Player {
         return score;
     }
 
+    // Main Logic for game play
     public void play(PlayerConsole console, GamePrinter printer) {
         this.inputConsole = console;
         int pinsLeft = 10;
