@@ -56,10 +56,9 @@ public class Player {
         this.inputConsole = console;
         int pinsLeft = 10;
 
-        if (currentFrame == 10) {
-            if (!getPreviousFrame().isStrike() || !getPreviousFrame().isSpare()) {
-                return;
-            }
+        if (isBonusFrame()) {
+            handleBonusFrame();
+            return;
         }
             int firstTurnScore = playFirstTurn();
             pinsLeft -= firstTurnScore;
@@ -78,6 +77,21 @@ public class Player {
                 currentFrame++;
             }
     }
+    
+    private void handleBonusFrame() {
+        int pinsLeft = 10;
+        if(getPreviousFrame().isStrike() || getPreviousFrame().isSpare()) {
+            int firstTurnScore = playFirstTurn();
+            //pinsLeft -= firstTurnScore;
+            handlePreviousFrame(firstTurnScore);
+            updateFirstRollScore(firstTurnScore);
+        }
+        if(getPreviousFrame().isStrike()) {
+            int secondTurnScore = playSecondTurn(pinsLeft);
+            handlePreviousFrame(secondTurnScore);
+            updateSecondRollScore(secondTurnScore);
+        }
+    }    
 
 // Add bonus to previous frame ony if previous frame is Strike
 // If previous frame is Strike, add both rolls of successive frame
@@ -88,7 +102,8 @@ public class Player {
                     (getPreviousFrame().isSpare() && getCurrentFrame().isFirstRollOfFrame()))) {
                 getPreviousFrame().addToBonus(score);
             }
-            if (getPreviousFrame().isStrike() && currentFrame - 1 > 0 && (getCurrentFrame().isFirstRollOfFrame() || isBonusFrame())) {
+            if (getPreviousFrame().isStrike() && currentFrame - 2 > 0 && scoreFrames[currentFrame - 2].isStrike() && 
+                (getCurrentFrame().isFirstRollOfFrame() || isBonusFrame())) {
                 scoreFrames[currentFrame - 1].addToBonus(score);
             }
         }
