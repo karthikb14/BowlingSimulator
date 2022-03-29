@@ -39,6 +39,10 @@ public class Player {
     private void updateSecondRollScore(int score) {
         getCurrentFrame().updateSecondRollScore(score);
     }
+    
+    private boolean isBonusFrame() {
+        return currentFrame == 10;
+    }
 
     private int playSecondTurn(int validPinCount) {
         int score = inputConsole.getPinsDown();
@@ -84,7 +88,7 @@ public class Player {
                     (getPreviousFrame().isSpare() && getCurrentFrame().isFirstRollOfFrame()))) {
                 getPreviousFrame().addToBonus(score);
             }
-            if (getPreviousFrame().isStrike() && currentFrame - 1 > 0 && getCurrentFrame().isFirstRollOfFrame()) {
+            if (getPreviousFrame().isStrike() && currentFrame - 1 > 0 && (getCurrentFrame().isFirstRollOfFrame() || isBonusFrame())) {
                 scoreFrames[currentFrame - 1].addToBonus(score);
             }
         }
