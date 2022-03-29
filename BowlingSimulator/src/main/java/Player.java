@@ -82,7 +82,6 @@ public class Player {
         int pinsLeft = 10;
         if(getPreviousFrame().isStrike() || getPreviousFrame().isSpare()) {
             int firstTurnScore = playFirstTurn();
-            //pinsLeft -= firstTurnScore;
             handlePreviousFrame(firstTurnScore);
             updateFirstRollScore(firstTurnScore);
         }
@@ -104,7 +103,7 @@ public class Player {
             }
             if (getPreviousFrame().isStrike() && currentFrame - 2 > 0 && scoreFrames[currentFrame - 2].isStrike() && 
                 (getCurrentFrame().isFirstRollOfFrame() || isBonusFrame())) {
-                scoreFrames[currentFrame - 1].addToBonus(score);
+                scoreFrames[currentFrame - 2].addToBonus(score);
             }
         }
     }
