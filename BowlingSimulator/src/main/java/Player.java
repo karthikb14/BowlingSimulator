@@ -101,6 +101,7 @@ public class Player {
                     (getPreviousFrame().isSpare() && getCurrentFrame().isFirstRollOfFrame()))) {
                 getPreviousFrame().addToBonus(score);
             }
+            // For successive strive scenario, bonus need to be added to previous - 1 frame also
             if (getPreviousFrame().isStrike() && currentFrame - 2 > 0 && scoreFrames[currentFrame - 2].isStrike() && 
                 (getCurrentFrame().isFirstRollOfFrame() || isBonusFrame())) {
                 scoreFrames[currentFrame - 2].addToBonus(score);
